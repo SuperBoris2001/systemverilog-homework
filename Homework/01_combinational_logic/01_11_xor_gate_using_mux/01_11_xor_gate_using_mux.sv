@@ -17,16 +17,27 @@ endmodule
 // Task
 //----------------------------------------------------------------------------
 
-module and_gate_using_mux
+module xor_gate_using_mux
 (
     input  a,
     input  b,
     output o
 );
-  wire y;
+wire out_not_a, out_not_b, out_firsrt_and, out_second_and, out_or;
+
+mux not_a_gate(.d0(1),.d1(0),.sel(a),.y(out_not_a));
+
+mux not_b_gate(.d0(1),.d1(0),.sel(b),.y(out_not_b));
+
+mux first_and_gate(.d0(0),.d1(b),.sel(out_not_a),.y(out_first_and));
+
+mux second_and_gate(.d0(0),.d1(out_not_b),.sel(a),.y(out_second_and));
+
+mux or_gate(.d0(out_second_and),.d1(1),.sel(out_first_and),.y(o));
+
   // Task:
-  // Implement and gate using instance(s) of mux,
+  // Implement xor gate using instance(s) of mux,
   // constants 0 and 1, and wire connections
-  mux mux1(.d0(0), .d1(a), .sel(b), .y(y));
-  assign o = y;
+
+
 endmodule

@@ -24,9 +24,20 @@ module mux_4_1
   output [3:0] y
 );
 
+wire[3:0] y0,y1;
+
+mux_2_1 mux_21_gate_1(
+.d0(d0),.d1(d1),.sel(sel[0]),.y(y0)
+);
+mux_2_1 mux_21_gate_2(
+.d0(d2),.d1(d3),.sel(sel[0]),.y(y1)
+);
+mux_2_1 mux_21_gate_3(
+.d0(y0),.d1(y1),.sel(sel[1]),.y(y)
+);
+
   // Task:
-  // Using code for mux_2_1 as an example,
-  // write code for 4:1 mux using "?:" operator
-  assign y = sel[1]?(sel[0]?d3:d2):(sel[0]?d1:d0);
+  // Implement mux_4_1 using three instances of mux_2_1
+
 
 endmodule

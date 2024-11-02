@@ -25,11 +25,15 @@ module mux_4_1
   output [3:0] y
 );
 
+mux_4_1_width_2 gate_1(
+.d0(d0[0:1]), .d1(d1[0:1]), .d2(d2[0:1]), .d3(d3[0:1]), .sel(sel), .y(y[0:1])
+);
+mux_4_1_width_2 gate_2(
+.d0(d0[2:3]), .d1(d1[2:3]), .d2(d2[2:3]), .d3(d3[2:3]), .sel(sel), .y(y[2:3])
+);
   // Task:
   // Implement mux_4_1 with 4-bit data
   // using two instances of mux_4_1_width_2 with 2-bit data
-  wire [1:0] s1, s2;
-  mux_4_1_width_2 first( .d0(d0[3:2]), .d1(d1[3:2]), .d2(d2[3:2]), .d3(d3[3:2]), .sel(sel), .y(s1));
-  mux_4_1_width_2 second( .d0(d0[1:0]), .d1(d1[1:0]), .d2(d2[1:0]), .d3(d3[1:0]), .sel(sel), .y(s2));
-  assign y = { s1, s2 };
+
+
 endmodule
